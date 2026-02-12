@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es2024",
+    "module": "none",
+    "rootDir": "./src",
+    "outDir": "./build/js",
+    "strict": true
+  },
+  "include": ["src"]
+}
