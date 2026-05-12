@@ -15,19 +15,19 @@ document.getElementById('catalogLink')?.addEventListener('click', (e) => {
 });
 
 function loadCategories() {
-    $ajax.sendGetRequest("../data/categories.json", (data: Category[]) => {
+    $ajax.sendGetRequest("./data/categories.json", (data: Category[]) => {
         ui.renderCategories(data, loadCategory, loadRandomCat);
     });
 }
 
 function loadCategory(shortname: string) {
-    $ajax.sendGetRequest(`../build/data/categories/${shortname}.json`, (data: CategoryDetail) => {
+    $ajax.sendGetRequest(`./data/categories/${shortname}.json`, (data: CategoryDetail) => {
         ui.renderItems(data);
     });
 }
 
 function loadRandomCat() {
-    $ajax.sendGetRequest("../build/data/categories.json", (categories: Category[]) => {
+    $ajax.sendGetRequest("./data/categories.json", (categories: Category[]) => {
         const random = categories[Math.floor(Math.random() * categories.length)];
         loadCategory(random.shortname);
     });
