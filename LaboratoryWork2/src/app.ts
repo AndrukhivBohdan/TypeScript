@@ -15,7 +15,7 @@ document.getElementById('catalogLink')?.addEventListener('click', (e) => {
 });
 
 function loadCategories() {
-    $ajax.sendGetRequest("../build/data/categories.json", (data: Category[]) => {
+    $ajax.sendGetRequest("../data/categories.json", (data: Category[]) => {
         ui.renderCategories(data, loadCategory, loadRandomCat);
     });
 }
