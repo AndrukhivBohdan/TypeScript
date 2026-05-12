@@ -10,17 +10,17 @@ document.getElementById('catalogLink')?.addEventListener('click', (e) => {
     loadCategories();
 });
 function loadCategories() {
-    $ajax.sendGetRequest("../data/categories.json", (data) => {
+    $ajax.sendGetRequest("./data/categories.json", (data) => {
         ui.renderCategories(data, loadCategory, loadRandomCat);
     });
 }
 function loadCategory(shortname) {
-    $ajax.sendGetRequest(`./build/data/categories/${shortname}.json`, (data) => {
+    $ajax.sendGetRequest(`./data/categories/${shortname}.json`, (data) => {
         ui.renderItems(data);
     });
 }
 function loadRandomCat() {
-    $ajax.sendGetRequest("./build/data/categories.json", (categories) => {
+    $ajax.sendGetRequest("./data/categories.json", (categories) => {
         const random = categories[Math.floor(Math.random() * categories.length)];
         loadCategory(random.shortname);
     });
