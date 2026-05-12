@@ -27,7 +27,7 @@ function loadCategory(shortname: string) {
 }
 
 function loadRandomCat() {
-    $ajax.sendGetRequest("../data/categories.json", (categories: Category[]) => {
+    $ajax.sendGetRequest("../build/data/categories.json", (categories: Category[]) => {
         const random = categories[Math.floor(Math.random() * categories.length)];
         loadCategory(random.shortname);
     });
