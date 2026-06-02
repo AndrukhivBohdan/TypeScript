@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es2024",
+    "module": "es2022",
+    
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,         
+    
+    "rootDir": "./src1",
+    "outDir": "./build/js",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+
+    "paths": {
+      "@core/*": ["./src1/core/*"],
+      "@models/*": ["./src1/models/*"],
+      "@services/*": ["./src1/services/*"],
+      "@ui/*": ["./src1/ui/*"],
+      "@routing/*": ["./src1/routing/*"]
+    }
+  },
+  "include": ["src1/**/*"],
+  "exclude": ["build"]                 
+}

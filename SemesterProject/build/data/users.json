@@ -1,0 +1,62 @@
+[
+	{
+		"username": "admin",
+		"passwordHash": "admin123",
+		"statistics": {
+			"easy": {
+				"gamesPlayed": 2,
+				"gamesWon": 2,
+				"gamesLost": 0,
+				"lettersFound": 8
+			},
+			"medium": {
+				"gamesPlayed": 2,
+				"gamesWon": 1,
+				"gamesLost": 1,
+				"lettersFound": 4
+			},
+			"hard": {
+				"gamesPlayed": 1,
+				"gamesWon": 0,
+				"gamesLost": 1,
+				"lettersFound": 0
+			},
+			"total": {
+				"gamesPlayed": 5,
+				"gamesWon": 3,
+				"gamesLost": 2,
+				"lettersFound": 12
+			}
+		}
+	},
+	{
+		"username": "Player_1",
+		"passwordHash": "qwerty",
+		"statistics": {
+			"easy": {
+				"gamesPlayed": 0,
+				"gamesWon": 0,
+				"gamesLost": 0,
+				"lettersFound": 0
+			},
+			"medium": {
+				"gamesPlayed": 0,
+				"gamesWon": 0,
+				"gamesLost": 0,
+				"lettersFound": 0
+			},
+			"hard": {
+				"gamesPlayed": 0,
+				"gamesWon": 0,
+				"gamesLost": 0,
+				"lettersFound": 0
+			},
+			"total": {
+				"gamesPlayed": 0,
+				"gamesWon": 0,
+				"gamesLost": 0,
+				"lettersFound": 0
+			}
+		}
+	}
+]

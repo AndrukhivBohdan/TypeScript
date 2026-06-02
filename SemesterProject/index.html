@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ζнÂйДü мĘĦÈ — Ігровий Маркетплейс</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1E40AF',     /* Глибокий синій фон */
+                            light: '#38BDF8',    /* Голубі акценти */
+                            orange: '#F97316',   /* Оранжеві цінники та таймер */
+                            yellow: '#FACC15',   /* Жовті заголовки та акценти */
+                            green: '#10B981'     /* Зелена зона навігації */
+                        }
+                    }
+                }   
+            }
+        }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-brand-blue text-slate-800 flex flex-col min-h-screen">
+
+    <header class="bg-brand-green text-white shadow-xl sticky top-0 z-50 border-b-4 border-black"
+        x-data="gameHeaderBridge()">
+
+    <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+
+        <div class="flex items-center space-x-6">
+
+            <a href="index.html"
+               class="font-black text-2xl tracking-widest text-brand-yellow uppercase transform -rotate-2 block">
+                ζнÂйДü мĘĦÈ
+            </a>
+
+            <nav class="hidden md:flex space-x-1 bg-slate-950 p-1 rounded-xl border-2 border-black">
+                <a href="index.html?view=home"
+                   class="text-white hover:bg-brand-light hover:text-black font-black px-4 py-1.5 rounded-lg text-sm">
+                    Дім
+                </a>
+
+                <a href="index.html?view=computers"
+                   class="text-white hover:bg-brand-light hover:text-black font-black px-4 py-1.5 rounded-lg text-sm">
+                    Комп'ютери
+                </a>
+
+                <a href="index.html?view=outdoors"
+                   class="text-white hover:bg-brand-light hover:text-black font-black px-4 py-1.5 rounded-lg text-sm">
+                    Туризм
+                </a>
+            </nav>
+        </div>
+
+        <div x-show="isGameActive"
+             class="flex items-center space-x-6 bg-slate-900 border-4 border-black px-6 py-2 rounded-2xl">
+
+            <div class="flex items-center space-x-2">
+                <span class="font-mono font-black text-xl text-brand-orange"
+                      x-text="timeRemaining">
+                    00:00
+                </span>
+            </div>
+
+            <div class="flex items-center space-x-2 border-l-2 border-slate-700 pl-6">
+                <span class="text-brand-light font-black uppercase text-sm">
+                    Знайдено:
+                </span>
+
+                <span class="text-brand-yellow font-black text-lg"
+                      x-text="`${foundHides} / ${totalHides}`">
+                    0 / 0
+                </span>
+            </div>
+
+        </div>
+
+        <div class="flex items-center space-x-4">
+
+            <a href="index.html?view=start"
+               x-show="!isGameActive"
+               class="text-white hover:bg-brand-light hover:text-black font-black px-4 py-1.5 rounded-lg text-sm">
+                Старт
+            </a>
+
+            <div class="bg-blue-900/40 border-2 border-black px-4 py-2 rounded-xl text-sm font-black flex items-center space-x-2">
+                <span :class="username === 'Гість' ? 'bg-brand-orange' : 'bg-brand-green'"
+                      class="w-2 h-2 rounded-full animate-pulse"></span>
+
+                <span class="text-black" x-text="username">Гість</span>
+            </div>
+
+            <template x-if="username !== 'Гість' && !isGameActive">
+                <a href="index.html?view=stats"
+                   class="bg-brand-light hover:bg-sky-400 text-black border-2 border-black font-black px-4 py-2 rounded-xl text-xs">
+                    Статистика
+                </a>
+            </template>
+
+            <template x-if="username === 'Гість' && !isGameActive">
+                <a href="index.html?view=auth"
+                   class="bg-brand-yellow text-black border-2 border-black font-black px-4 py-2 rounded-xl text-xs">
+                    Увійти
+                </a>
+            </template>
+
+            <template x-if="username !== 'Гість' && !isGameActive">
+                <button @click="handleLogout()"
+                        class="bg-brand-orange text-black border-2 border-black font-black px-4 py-2 rounded-xl text-xs">
+                    Вийти
+                </button>
+            </template>
+
+        </div>
+
+    </div>
+</header>
+
+    <main id="app-content" class="flex-grow w-full flex flex-col justify-center items-center relative">
+        <div class="text-center text-white p-8">
+            <div class="w-16 h-16 border-4 border-brand-yellow border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p class="font-mono text-xl tracking-widest uppercase animate-pulse">
+                Завантаження ігрового всесвіту...
+            </p>
+        </div>
+    </main>
+
+    <footer class="bg-blue-950 text-center py-4 text-xs font-mono font-bold text-blue-400/30 border-t-4 border-black">
+        2026 Семестровий проект. Розробка WEB-додатків (TypeScript). Студент Андрухів Б. В.
+    </footer>
+
+    <script>
+        function gameHeaderBridge() {
+            return {
+                isGameActive: false,
+                username: 'Гість',
+                timeRemaining: '00:00',
+                foundHides: 0,
+                totalHides: 0,
+                showStats: false,
+                stats: {
+                    gamesPlayed: 0,
+                    gamesWon: 0,
+                    gamesLost: 0,
+                    lettersFound: 0
+                },
+
+                init() {
+                    
+                    const savedUser = localStorage.getItem('current_user');
+            if (savedUser) {
+                try {
+                    const userObj = JSON.parse(savedUser);
+                    this.username = userObj.username || 'Гравець';
+                    if (userObj.statistics) this.stats = userObj.statistics;
+                } catch (e) { console.error(e); }
+            }
+
+                    window.HeaderHUD = this;
+
+                    document.dispatchEvent(new CustomEvent('spa-header-ready'));
+                },
+
+                handleLogout() {
+                    localStorage.removeItem('current_user');
+                    window.location.href = 'index.html';
+                }
+            }
+        }
+    </script>
+
+    <script type="module" src="./build/js/main.js"></script>
+</body>
+</html>
